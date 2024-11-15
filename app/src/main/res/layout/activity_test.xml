@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+    <Button
+        android:id="@+id/regularBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_background_state"
+        android:text="I'm a button" />
+
+    <ImageButton
+        android:id="@+id/imageBtn"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@null"
+        android:contentDescription="A tiny Android icon"
+        android:src="@drawable/ic_btn" />
+
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="56dp"-->
+<!--        android:drawableStart="@drawable/ic_btn"-->
+<!--        android:drawablePadding="4dp"-->
+<!--        android:background="@drawable/btn_background_state"-->
+<!--        android:text="I'm a button with an icon" />-->
+
+    <Button
+        android:layout_width="56dp"
+        android:layout_height="54dp"
+        android:background="@drawable/ripple"
+        android:textColor="@android:color/white"
+        android:drawablePadding="4dp"
+        android:text="5" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress" />
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/outlinedTextField"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Hints"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="textPassword"-->
+<!--            />-->
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I accept terms and condition" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/layer_list" />
+
+    <RadioGroup
+        android:id="@+id/genderGroup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RadioButton
+            android:id="@+id/maleRadioBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Male" />
+
+        <RadioButton
+            android:id="@+id/femaleRadioBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Female" />
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Inset Drawable Example" />
+
+
+</LinearLayout>
