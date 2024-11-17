@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.souravpalitrana.androiduicomponents.databinding.ActivityCalculatorBinding
 import com.souravpalitrana.androiduicomponents.ui.theme.AndroidUIComponentsTheme
+import net.objecthunter.exp4j.ExpressionBuilder
 
 class MainActivity : ComponentActivity() {
 
@@ -86,6 +87,35 @@ class MainActivity : ComponentActivity() {
         }
         binding.dot.setOnClickListener{
             binding.InputText.append(".")
+        }
+        binding.leftbracket.setOnClickListener{
+            binding.InputText.append(" ( ")
+        }
+        binding.rightbracket.setOnClickListener{
+            binding.InputText.append(" ) ")
+        }
+        binding.plus.setOnClickListener{
+            binding.InputText.append(" + ")
+        }
+        binding.minus.setOnClickListener{
+            binding.InputText.append(" - ")
+        }
+        binding.multiply.setOnClickListener{
+            binding.InputText.append(" * ")
+        }
+        binding.divide.setOnClickListener{
+            binding.InputText.append(" / ")
+        }
+        binding.ans.setOnClickListener{
+            var expression= ExpressionBuilder(binding.InputText.text.toString()).build()
+            var result = expression.evaluate()
+            val longresult = result.toLong()
+
+            if(result == longresult.toDouble()){
+                binding.outputText.text = longresult.toString()
+            }else{
+                binding.outputText.text = result.toString()
+            }
         }
 //        setContent {
 //            AndroidUIComponentsTheme {
