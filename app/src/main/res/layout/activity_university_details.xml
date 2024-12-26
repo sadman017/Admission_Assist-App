@@ -1,0 +1,141 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- University Name -->
+        <TextView
+            android:id="@+id/universityNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="University Name" />
+
+        <!-- University Location -->
+        <TextView
+            android:id="@+id/universityLocationTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:text="Location: " />
+
+        <!-- University Established -->
+        <TextView
+            android:id="@+id/universityEstablishedTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:text="Established: " />
+
+        <!-- University Description -->
+        <TextView
+            android:id="@+id/universityDescriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:text="Description: " />
+
+        <!-- Departments -->
+        <TextView
+            android:id="@+id/universityDepartmentsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:text="Departments: " />
+
+        <!-- Admission Requirements -->
+        <TextView
+            android:id="@+id/universityAdmissionRequirementsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:text="Admission Requirements: " />
+
+        <!-- Total Seats -->
+        <TextView
+            android:id="@+id/universityTotalSeatsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:text="Total Seats: " />
+
+        <!-- Admission Test Information -->
+        <TextView
+            android:id="@+id/universityAdmissionTestInfoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:text="Admission Test Information: " />
+
+        <!-- Admission Test Syllabus -->
+        <TextView
+            android:id="@+id/universityAdmissionTestSyllabusTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:text="Test Syllabus: " />
+
+        <!-- Admission Test Date -->
+        <TextView
+            android:id="@+id/universityAdmissionTestDateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:text="Test Date: " />
+
+        <!-- Admission Test Time -->
+        <TextView
+            android:id="@+id/universityAdmissionTestTimeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:text="Test Time: " />
+
+        <!-- Admission Test Venue -->
+        <TextView
+            android:id="@+id/universityAdmissionTestVenueTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:text="Test Venue: " />
+
+        <!-- Admission Test Duration -->
+        <TextView
+            android:id="@+id/universityAdmissionTestDurationTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:text="Test Duration: " />
+
+        <!-- Website Link -->
+        <TextView
+            android:id="@+id/universityWebsiteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/holo_blue_dark"
+            android:text="Website: " />
+    </LinearLayout>
+</ScrollView>

@@ -164,4 +164,8 @@
     <color name="colorOnCustomColor1_highContrast">#FFFFFF</color>
     <color name="colorCustomColor1Container_highContrast">#004A52</color>
     <color name="colorOnCustomColor1Container_highContrast">#FFFFFF</color>
+    <!-- Timeline Status Colors -->
+    <color name="status_completed">#4CAF50</color>
+    <color name="status_pending">#FFA000</color>
+    <color name="status_upcoming">#2196F3</color>
 </resources>
