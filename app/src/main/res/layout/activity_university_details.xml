@@ -9,133 +9,247 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- University Name -->
+        <!-- Section: University Overview -->
         <TextView
-            android:id="@+id/universityNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:text="University Overview"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="University Name" />
+            android:layout_marginBottom="8dp" />
 
-        <!-- University Location -->
-        <TextView
-            android:id="@+id/universityLocationTextView"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:text="Location: " />
+            android:elevation="4dp"
+            android:layout_marginBottom="16dp"
+            android:padding="8dp">
 
-        <!-- University Established -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- University Name -->
+                <TextView
+                    android:id="@+id/universityNameTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="University Name"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="8dp" />
+
+                <!-- Location, Established, Description, Type -->
+                <TextView
+                    android:id="@+id/universityTypeTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Type: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/universityLocationTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Location: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/universityEstablishedTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Established: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/universityDescriptionTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Description: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Section: Admission Details -->
         <TextView
-            android:id="@+id/universityEstablishedTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:text="Established: " />
+            android:text="Admission Details"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
 
-        <!-- University Description -->
-        <TextView
-            android:id="@+id/universityDescriptionTextView"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="16sp"
-            android:text="Description: " />
+            android:elevation="4dp"
+            android:layout_marginBottom="16dp"
+            android:padding="8dp">
 
-        <!-- Departments -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Admission Requirements -->
+                <TextView
+                    android:id="@+id/universityAdmissionRequirementsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Admission Requirements: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <!-- Seats -->
+                <TextView
+                    android:id="@+id/universityTotalSeatsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Seats: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Section: Admission Test Details -->
         <TextView
-            android:id="@+id/universityDepartmentsTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="16sp"
-            android:text="Departments: " />
+            android:text="Admission Test Details"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
 
-        <!-- Admission Requirements -->
-        <TextView
-            android:id="@+id/universityAdmissionRequirementsTextView"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="16sp"
-            android:text="Admission Requirements: " />
+            android:elevation="4dp"
+            android:layout_marginBottom="16dp"
+            android:padding="8dp">
 
-        <!-- Total Seats -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Test Information -->
+                <TextView
+                    android:id="@+id/universityAdmissionTestInfoTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Test Information: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <!-- Syllabus -->
+                <TextView
+                    android:id="@+id/universityAdmissionTestSyllabusTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Test Syllabus: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <!-- Date, Time, Venue -->
+                <TextView
+                    android:id="@+id/universityAdmissionTestDateTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Test Date: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/universityAdmissionTestTimeTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Test Time: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/universityAdmissionTestVenueTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Test Venue: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:id="@+id/universityAdmissionTestDurationTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Test Duration: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Section: Additional Features -->
         <TextView
-            android:id="@+id/universityTotalSeatsTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:text="Total Seats: " />
+            android:text="Additional Features"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
 
-        <!-- Admission Test Information -->
-        <TextView
-            android:id="@+id/universityAdmissionTestInfoTextView"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="16sp"
-            android:text="Admission Test Information: " />
+            android:elevation="4dp"
+            android:layout_marginBottom="16dp"
+            android:padding="8dp">
 
-        <!-- Admission Test Syllabus -->
-        <TextView
-            android:id="@+id/universityAdmissionTestSyllabusTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:text="Test Syllabus: " />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <!-- Admission Test Date -->
-        <TextView
-            android:id="@+id/universityAdmissionTestDateTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:text="Test Date: " />
+                <!-- Website -->
+                <TextView
+                    android:id="@+id/universityWebsiteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Website: "
+                    android:textSize="16sp"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:layout_marginTop="8dp"
+                    android:autoLink="web" />
 
-        <!-- Admission Test Time -->
-        <TextView
-            android:id="@+id/universityAdmissionTestTimeTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:text="Test Time: " />
+                <!-- Program-Specific GPA Requirements -->
+                <TextView
+                    android:id="@+id/programSpecificGpaTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Program-Specific GPA Requirements: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
 
-        <!-- Admission Test Venue -->
-        <TextView
-            android:id="@+id/universityAdmissionTestVenueTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:text="Test Venue: " />
+                <!-- Quota Adjustments -->
+                <TextView
+                    android:id="@+id/quotaAdjustmentsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Quota Adjustments: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
 
-        <!-- Admission Test Duration -->
-        <TextView
-            android:id="@+id/universityAdmissionTestDurationTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:text="Test Duration: " />
-
-        <!-- Website Link -->
-        <TextView
-            android:id="@+id/universityWebsiteTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="16sp"
-            android:textColor="@android:color/holo_blue_dark"
-            android:text="Website: " />
+                <!-- Additional Requirements -->
+                <TextView
+                    android:id="@+id/additionalRequirementsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Additional Requirements: "
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 </ScrollView>

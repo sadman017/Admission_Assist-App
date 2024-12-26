@@ -25,4 +25,8 @@ data class University(
     val admissionTestTotalMarks: Int,
     val admissionTestPassMarks: Int,
     val admissionTestNegativeMarking: Boolean,
+    val programSpecificGpaRequirements: Map<String, Map<String, Double>>,
+    val quotaAdjustments: Map<String, Int>,
+    val additionalRequirements: Map<String, String>,
+    val universityType: String,
 ): Serializable

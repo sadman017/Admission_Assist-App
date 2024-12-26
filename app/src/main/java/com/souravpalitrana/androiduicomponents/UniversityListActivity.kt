@@ -12,81 +12,129 @@ import com.google.android.material.textfield.TextInputEditText
 class UniversityListActivity : AppCompatActivity() {
     private lateinit var adapter: UniversityAdapter
     private lateinit var searchEditText: TextInputEditText
-    private val universities = listOf(
-        University(
-            name = "University of Dhaka",
-            location = "Dhaka",
-            established = 1921,
-            imageUrl = "https://example.com/dhaka-university.jpg",
-            websiteUrl = "https://du.ac.bd",
-            description = "Located in Dhaka, the capital of Bangladesh. It is the oldest university in the country, established in 1921.",
-            departments = listOf("Mathematics", "Physics", "Chemistry", "Economics", "Law"),
-            requiredSSCGpa = 4.5,
-            requiredHSCGpa = 4.5,
-            totalSeats = 5000,
-            admissionTestRequired = true,
-            admissionTestSubjects = listOf("English", "Mathematics", "General Knowledge"),
-            admissionTestMarksDistribution = mapOf("English" to 40, "Mathematics" to 40, "General Knowledge" to 20),
-            admissionTestSyllabus = "General subjects including English, Mathematics, and General Knowledge.",
-            seatAvailability = mapOf("Science" to 2000, "Arts" to 1500, "Commerce" to 1500),
-            admissionTestDate = "2024-01-15",
-            admissionTestTime = "10:00 AM",
-            admissionTestVenue = "Dhaka University Campus",
-            admissionTestDuration = "2 hours",
-            admissionTestTotalMarks = 100,
-            admissionTestPassMarks = 40,
-            admissionTestNegativeMarking = true
-        ),
-        University(
-            name = "Bangladesh University of Engineering and Technology",
-            location = "Dhaka",
-            established = 1962,
-            imageUrl = "https://example.com/buet.jpg",
-            websiteUrl = "https://buet.ac.bd",
-            description = "One of the top engineering universities in Bangladesh.",
-            departments = listOf("Civil Engineering", "Electrical Engineering", "Computer Science", "Architecture"),
-            requiredSSCGpa = 4.75,
-            requiredHSCGpa = 4.75,
-            totalSeats = 1000,
-            admissionTestRequired = true,
-            admissionTestSubjects = listOf("Mathematics", "Physics", "Chemistry"),
-            admissionTestMarksDistribution = mapOf("Mathematics" to 50, "Physics" to 30, "Chemistry" to 20),
-            admissionTestSyllabus = "Engineering-specific syllabus focusing on Mathematics, Physics, and Chemistry.",
-            seatAvailability = mapOf("Engineering" to 800, "Architecture" to 200),
-            admissionTestDate = "2024-02-01",
-            admissionTestTime = "9:00 AM",
-            admissionTestVenue = "BUET Campus",
-            admissionTestDuration = "3 hours",
-            admissionTestTotalMarks = 100,
-            admissionTestPassMarks = 50,
-            admissionTestNegativeMarking = true
-        ),
-        University(
-            name = "Chittagong University",
-            location = "Chittagong",
-            established = 1966,
-            imageUrl = "https://example.com/chittagong-university.jpg",
-            websiteUrl = "https://cu.ac.bd",
-            description = "Located in Chittagong, known for its scenic campus surrounded by hills.",
-            departments = listOf("Marine Science", "Economics", "Sociology", "Biology"),
-            requiredSSCGpa = 4.0,
-            requiredHSCGpa = 4.0,
-            totalSeats = 4000,
-            admissionTestRequired = true,
-            admissionTestSubjects = listOf("Bangla", "English", "General Knowledge"),
-            admissionTestMarksDistribution = mapOf("Bangla" to 30, "English" to 40, "General Knowledge" to 30),
-            admissionTestSyllabus = "Comprehensive subjects focusing on Bangla, English, and General Knowledge.",
-            seatAvailability = mapOf("Science" to 1500, "Arts" to 1500, "Commerce" to 1000),
-            admissionTestDate = "2024-01-20",
-            admissionTestTime = "11:00 AM",
-            admissionTestVenue = "Chittagong University Campus",
-            admissionTestDuration = "2 hours",
-            admissionTestTotalMarks = 100,
-            admissionTestPassMarks = 40,
-            admissionTestNegativeMarking = false
-        ),
-        // Add more universities as needed with similar structure
-    )
+    companion object {
+        val universities = listOf(
+            University(
+                name = "University of Dhaka",
+                location = "Dhaka",
+                established = 1921,
+                imageUrl = "https://example.com/dhaka-university.jpg",
+                websiteUrl = "https://du.ac.bd",
+                description = "Located in Dhaka, the capital of Bangladesh. It is the oldest university in the country, established in 1921.",
+                departments = listOf("Mathematics", "Physics", "Chemistry", "Economics", "Law"),
+                requiredSSCGpa = 4.5,
+                requiredHSCGpa = 4.5,
+                totalSeats = 5000,
+                universityType = "Public",
+                admissionTestRequired = true,
+                admissionTestSubjects = listOf("English", "Mathematics", "General Knowledge"),
+                admissionTestMarksDistribution = mapOf("English" to 40, "Mathematics" to 40, "General Knowledge" to 20),
+                admissionTestSyllabus = "General subjects including English, Mathematics, and General Knowledge.",
+                seatAvailability = mapOf("Science" to 2000, "Arts" to 1500, "Commerce" to 1500),
+                admissionTestDate = "2024-01-15",
+                admissionTestTime = "10:00 AM",
+                admissionTestVenue = "Dhaka University Campus",
+                admissionTestDuration = "2 hours",
+                admissionTestTotalMarks = 100,
+                admissionTestPassMarks = 40,
+                admissionTestNegativeMarking = true,
+                programSpecificGpaRequirements = mapOf(
+                    "Mathematics" to mapOf("SSC" to 4.8, "HSC" to 4.8),
+                    "Physics" to mapOf("SSC" to 4.6, "HSC" to 4.7),
+                    "Economics" to mapOf("SSC" to 4.5, "HSC" to 4.5)
+                ),
+                quotaAdjustments = mapOf(
+                    "Freedom Fighter Quota" to 10, // 10% of seats reserved
+                    "Tribal Quota" to 5,          // 5% of seats reserved
+                    "Physically Challenged Quota" to 3 // 3% of seats reserved
+                ),
+                additionalRequirements = mapOf(
+                    "English" to "Minimum B grade in both SSC and HSC",
+                    "Mathematics" to "Minimum A grade in HSC"
+                )
+            ),
+            University(
+                name = "Bangladesh University of Engineering and Technology",
+                location = "Dhaka",
+                established = 1962,
+                imageUrl = "https://example.com/buet.jpg",
+                websiteUrl = "https://buet.ac.bd",
+                description = "One of the top engineering universities in Bangladesh.",
+                departments = listOf("Civil Engineering", "Electrical Engineering", "Computer Science", "Architecture"),
+                requiredSSCGpa = 4.75,
+                requiredHSCGpa = 4.75,
+                totalSeats = 1000,
+                universityType = "Engineering",
+                admissionTestRequired = true,
+                admissionTestSubjects = listOf("Mathematics", "Physics", "Chemistry"),
+                admissionTestMarksDistribution = mapOf("Mathematics" to 50, "Physics" to 30, "Chemistry" to 20),
+                admissionTestSyllabus = "Engineering-specific syllabus focusing on Mathematics, Physics, and Chemistry.",
+                seatAvailability = mapOf("Engineering" to 800, "Architecture" to 200),
+                admissionTestDate = "2024-02-01",
+                admissionTestTime = "9:00 AM",
+                admissionTestVenue = "BUET Campus",
+                admissionTestDuration = "3 hours",
+                admissionTestTotalMarks = 100,
+                admissionTestPassMarks = 50,
+                admissionTestNegativeMarking = true,
+                programSpecificGpaRequirements = mapOf(
+                    "Civil Engineering" to mapOf("SSC" to 4.8, "HSC" to 4.8),
+                    "Electrical Engineering" to mapOf("SSC" to 4.7, "HSC" to 4.8),
+                    "Computer Science" to mapOf("SSC" to 4.7, "HSC" to 4.8)
+                ),
+                quotaAdjustments = mapOf(
+                    "Freedom Fighter Quota" to 5, // 5% of seats reserved
+                    "Tribal Quota" to 2,          // 2% of seats reserved
+                    "Physically Challenged Quota" to 1 // 1% of seats reserved
+                ),
+                additionalRequirements = mapOf(
+                    "Mathematics" to "Minimum A grade in both SSC and HSC",
+                    "Physics" to "Minimum A grade in HSC"
+                )
+            ),
+            University(
+                name = "Chittagong University",
+                location = "Chittagong",
+                established = 1966,
+                imageUrl = "https://example.com/chittagong-university.jpg",
+                websiteUrl = "https://cu.ac.bd",
+                description = "Located in Chittagong, known for its scenic campus surrounded by hills.",
+                departments = listOf("Marine Science", "Economics", "Sociology", "Biology"),
+                requiredSSCGpa = 4.0,
+                requiredHSCGpa = 4.0,
+                totalSeats = 4000,
+                universityType = "Public",
+                admissionTestRequired = true,
+                admissionTestSubjects = listOf("Bangla", "English", "General Knowledge"),
+                admissionTestMarksDistribution = mapOf("Bangla" to 30, "English" to 40, "General Knowledge" to 30),
+                admissionTestSyllabus = "Comprehensive subjects focusing on Bangla, English, and General Knowledge.",
+                seatAvailability = mapOf("Science" to 1500, "Arts" to 1500, "Commerce" to 1000),
+                admissionTestDate = "2024-01-20",
+                admissionTestTime = "11:00 AM",
+                admissionTestVenue = "Chittagong University Campus",
+                admissionTestDuration = "2 hours",
+                admissionTestTotalMarks = 100,
+                admissionTestPassMarks = 40,
+                admissionTestNegativeMarking = false,
+                programSpecificGpaRequirements = mapOf(
+                    "Marine Science" to mapOf("SSC" to 4.2, "HSC" to 4.2),
+                    "Economics" to mapOf("SSC" to 4.0, "HSC" to 4.0),
+                    "Sociology" to mapOf("SSC" to 4.0, "HSC" to 4.0)
+                ),
+                quotaAdjustments = mapOf(
+                    "Freedom Fighter Quota" to 10, // 10% of seats reserved
+                    "Tribal Quota" to 5,          // 5% of seats reserved
+                    "Physically Challenged Quota" to 3 // 3% of seats reserved
+                ),
+                additionalRequirements = mapOf(
+                    "Bangla" to "Minimum B grade in both SSC and HSC",
+                    "English" to "Minimum B grade in HSC"
+                )
+            ),
+            // Add more universities as needed with similar structure
+        )
+    }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -46,6 +46,13 @@
             android:name=".UniversityDetailsActivity"
             android:exported="false"/>
 
+        <activity
+            android:name=".EligibilityCheckActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".EligibilityResultsActivity"
+            android:exported="false"/>
 
     </application>
 

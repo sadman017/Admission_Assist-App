@@ -7,28 +7,42 @@
     android:padding="16dp"
     android:background="#F5F5F5">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="24dp">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/baseline_school_24"
-            android:layout_marginEnd="16dp"
-            app:tint="#1976D2"/>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_menu"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="University Navigator"
+            app:titleTextColor="@color/white"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="University Navigator"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#1976D2"/>
-    </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_marginBottom="24dp">-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:src="@drawable/baseline_school_24"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            app:tint="#1976D2"/>-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="University Navigator"-->
+<!--            android:textSize="24sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="#1976D2"/>-->
+<!--    </LinearLayout>-->
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/universityFinderCard"
