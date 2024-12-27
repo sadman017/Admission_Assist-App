@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#F5F5F5">
+    android:background="@color/material_grey_50">
 
+    <!-- AppBar with Toolbar -->
     <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/appBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_menu"
@@ -18,127 +22,238 @@
             android:background="?attr/colorPrimary"
             app:title="University Navigator"
             app:titleTextColor="@color/white"/>
-
     </com.google.android.material.appbar.AppBarLayout>
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:gravity="center"-->
-<!--        android:layout_marginBottom="24dp">-->
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="16dp">
 
-<!--        <ImageView-->
-<!--            android:layout_width="48dp"-->
-<!--            android:layout_height="48dp"-->
-<!--            android:src="@drawable/baseline_school_24"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            app:tint="#1976D2"/>-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="University Navigator"-->
-<!--            android:textSize="24sp"-->
-<!--            android:textStyle="bold"-->
-<!--            android:textColor="#1976D2"/>-->
-<!--    </LinearLayout>-->
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/universityFinderCard"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:rippleColor="#33000000">
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:gravity="center_vertical">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/baseline_search_24"
-                app:tint="#1976D2"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!-- University Finder Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/universityFinderCard"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="University Finder"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#1976D2"/>
+                    android:padding="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Search and explore universities"
-                    android:textSize="14sp"
-                    android:textColor="#757575"/>
-            </LinearLayout>
-        </LinearLayout>
+                    <ImageView
+                        android:id="@+id/iconUniversityFinder"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/baseline_search_24"
+                        app:tint="?attr/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    </com.google.android.material.card.MaterialCardView>
+                    <TextView
+                        android:id="@+id/textUniversityFinder"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="University Finder"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorPrimary"
+                        app:layout_constraintTop_toTopOf="@id/iconUniversityFinder"
+                        app:layout_constraintStart_toEndOf="@id/iconUniversityFinder"
+                        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/eligibilityCheckCard"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:rippleColor="#33000000">
+                    <TextView
+                        android:id="@+id/subtextUniversityFinder"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Search and explore universities"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey"
+                        app:layout_constraintTop_toBottomOf="@id/textUniversityFinder"
+                        app:layout_constraintStart_toStartOf="@id/textUniversityFinder"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/baseline_check_circle_24"
-                app:tint="#4CAF50"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!-- Eligibility Check Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/eligibilityCheckCard"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp">
+                app:layout_constraintTop_toBottomOf="@id/universityFinderCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Eligibility Check"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#4CAF50"/>
+                    android:padding="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:id="@+id/iconEligibilityCheck"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/baseline_check_circle_24"
+                        app:tint="@color/teal_700"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/textEligibilityCheck"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Eligibility Check"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/teal_700"
+                        app:layout_constraintTop_toTopOf="@id/iconEligibilityCheck"
+                        app:layout_constraintStart_toEndOf="@id/iconEligibilityCheck"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/subtextEligibilityCheck"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Check your eligibility for universities"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toBottomOf="@id/textEligibilityCheck"
+                        app:layout_constraintStart_toStartOf="@id/textEligibilityCheck"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Additional sections like Deadlines and Shortlists can follow the same pattern -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/deadlinesCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/eligibilityCheckCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginBottom="16dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Check your eligibility for universities"
-                    android:textSize="14sp"
-                    android:textColor="#757575"/>
-            </LinearLayout>
-        </LinearLayout>
+                    android:padding="16dp">
 
-    </com.google.android.material.card.MaterialCardView>
+                    <ImageView
+                        android:id="@+id/iconDeadlines"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/baseline_calendar_today_24"
+                        app:tint="@color/colorCustomColor1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
 
-</LinearLayout> 
+                    <TextView
+                        android:id="@+id/textDeadlines"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Admission Deadlines"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorCustomColor1"
+                        app:layout_constraintTop_toTopOf="@id/iconDeadlines"
+                        app:layout_constraintStart_toEndOf="@id/iconDeadlines"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/subtextDeadlines"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Track upcoming university deadlines"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toBottomOf="@id/textDeadlines"
+                        app:layout_constraintStart_toStartOf="@id/textDeadlines"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/shortlistCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/deadlinesCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginBottom="16dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/iconShortlist"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/baseline_lock_24"
+                        app:tint="@color/purple_500"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/textShortlist"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="My Shortlist"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/purple_700"
+                        app:layout_constraintTop_toTopOf="@id/iconShortlist"
+                        app:layout_constraintStart_toEndOf="@id/iconShortlist"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/subtextShortlist"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Manage your shortlisted universities"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toBottomOf="@id/textShortlist"
+                        app:layout_constraintStart_toStartOf="@id/textShortlist"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

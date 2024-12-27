@@ -28,12 +28,24 @@ class EligibilityResultsActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.eligibleUniversitiesRecyclerView)
-        adapter = UniversityAdapter(emptyList()) { university ->
-            val intent = Intent(this, UniversityDetailsActivity::class.java)
-            intent.putExtra("university", university)
-            startActivity(intent)
-        }
         recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = UniversityAdapter(
+            universities = emptyList(),
+            onItemClick = { university ->
+                val intent = Intent(this, UniversityDetailsActivity::class.java)
+                intent.putExtra("university", university)
+                startActivity(intent)
+            },
+            onShortlistClick = { university, isShortlisted ->
+                if (isShortlisted) {
+                    ShortlistManager.addToShortlist(this, university.name)
+                    Toast.makeText(this, "Added to shortlist", Toast.LENGTH_SHORT).show()
+                } else {
+                    ShortlistManager.removeFromShortlist(this, university.name)
+                    Toast.makeText(this, "Removed from shortlist", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
         recyclerView.adapter = adapter
     }
 
@@ -71,7 +83,7 @@ class EligibilityResultsActivity : AppCompatActivity() {
             isEligible
         }
 
-        adapter.updateList(eligibleUniversities)
+//        adapter.updateList(eligibleUniversities)
 
         if (eligibleUniversities.isEmpty()) {
             Toast.makeText(this, "No eligible universities found", Toast.LENGTH_LONG).show()

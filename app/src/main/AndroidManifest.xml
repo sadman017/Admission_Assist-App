@@ -54,6 +54,22 @@
             android:name=".EligibilityResultsActivity"
             android:exported="false"/>
 
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".ProfileViewActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".DeadlinesActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".ShortlistActivity"
+            android:exported="false"/>
+
     </application>
 
 </manifest>

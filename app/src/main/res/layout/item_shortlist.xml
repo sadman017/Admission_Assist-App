@@ -6,23 +6,12 @@
     android:layout_margin="4dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp">
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:titleTextColor="@color/white"/>
-
-    </com.google.android.material.appbar.AppBarLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="12dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -36,30 +25,21 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:padding="4dp"
-                android:textColor="@color/colorCustomColor1"/>
+                android:text="University Name"/>
 
             <TextView
-                android:id="@+id/locationText"
+                android:id="@+id/programText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:layout_marginTop="4dp"/>
-
-            <TextView
-                android:id="@+id/universityTypeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/colorCustomColor1Container"
-                android:layout_marginTop="2dp"/>
+                android:text="Program"/>
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/shortlistButton"
+            android:id="@+id/removeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_bookmark_border"
+            android:src="@drawable/ic_close"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="8dp"/>
     </LinearLayout>

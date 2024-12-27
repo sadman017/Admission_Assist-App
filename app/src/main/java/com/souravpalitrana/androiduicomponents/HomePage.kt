@@ -34,11 +34,27 @@ class HomePage : AppCompatActivity() {
                 true
             }
             R.id.action_profile -> {
-                Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show()
+                showProfileDashboard()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun showProfileDashboard() {
+        val profileDashboard = ProfileDashboardSheet().apply {
+            setOnViewProfileClickListener {
+                startActivity(Intent(this@HomePage, ProfileViewActivity::class.java))
+            }
+            setOnSettingsClickListener {
+                startActivity(Intent(this@HomePage, ProfileActivity::class.java))
+            }
+            setOnLogoutClickListener {
+                // TODO: Implement logout functionality
+                Toast.makeText(this@HomePage, "Logging out...", Toast.LENGTH_SHORT).show()
+            }
+        }
+        profileDashboard.show(supportFragmentManager, ProfileDashboardSheet.TAG)
     }
 
     private fun setupClickListeners() {
@@ -49,6 +65,16 @@ class HomePage : AppCompatActivity() {
         findViewById<MaterialCardView>(R.id.eligibilityCheckCard).setOnClickListener {
             // TODO: Navigate to EligibilityCheckActivity once created
              startActivity(Intent(this, EligibilityCheckActivity::class.java))
+        }
+
+        findViewById<MaterialCardView>(R.id.deadlinesCard).setOnClickListener {
+            // TODO: Navigate to DeadlinesActivity once created
+            startActivity(Intent(this, DeadlinesActivity::class.java))
+
+        }
+
+        findViewById<MaterialCardView>(R.id.shortlistCard).setOnClickListener {
+            startActivity(Intent(this, ShortlistActivity::class.java))
         }
     }
 }

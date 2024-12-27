@@ -3,6 +3,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -148,13 +149,28 @@ class UniversityListActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.universitiesRecyclerView)
-        adapter = UniversityAdapter(universities) { university ->
-            val intent = Intent(this, UniversityDetailsActivity::class.java)
-            intent.putExtra("university", university)
-            startActivity(intent)
-        }
         recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = UniversityAdapter(
+            universities = universities,
+            onItemClick = { university ->
+                val intent = Intent(this, UniversityDetailsActivity::class.java)
+                intent.putExtra("university", university)
+                startActivity(intent)
+            },
+            onShortlistClick = { university, isShortlisted ->
+                if (isShortlisted) {
+                    ShortlistManager.addToShortlist(this, university.name)
+                    Toast.makeText(this, "Added to shortlist", Toast.LENGTH_SHORT).show()
+                } else {
+                    ShortlistManager.removeFromShortlist(this, university.name)
+                    Toast.makeText(this, "Removed from shortlist", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
         recyclerView.adapter = adapter
+
+        // Load initial shortlist state
+        adapter.updateShortlistedUniversities(ShortlistManager.getShortlistedUniversities(this))
     }
 
     private fun setupSearch() {
@@ -182,5 +198,11 @@ class UniversityListActivity : AppCompatActivity() {
             universities.filter { it.name.contains(query, ignoreCase = true) }
         }
         adapter.updateList(filteredList)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh shortlist state when returning to this screen
+        adapter.updateShortlistedUniversities(ShortlistManager.getShortlistedUniversities(this))
     }
 }
