@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.souravpalitrana.androiduicomponents'
+    namespace 'com.shaan.androiduicomponents'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.souravpalitrana.androiduicomponents"
+        applicationId "com.shaan.androiduicomponents"
         minSdk 24
         targetSdk 34
         versionCode 1

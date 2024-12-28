@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "607767349856",
+    "project_id": "admissionassistapp",
+    "storage_bucket": "admissionassistapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607767349856:android:a8b0fe94a3ab3994185105",
+        "android_client_info": {
+          "package_name": "com.shaan.androiduicomponents"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYfEN2R3HvsYEbb_3fLP1mlObmkOQm_A4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
