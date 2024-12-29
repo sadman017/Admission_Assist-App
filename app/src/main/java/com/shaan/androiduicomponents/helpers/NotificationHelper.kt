@@ -6,68 +6,172 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.shaan.androiduicomponents.R
 import com.shaan.androiduicomponents.UniversityDetailsActivity
 import com.shaan.androiduicomponents.managers.NotificationManager as CustomNotificationManager
-import com.shaan.androiduicomponents.models.University
 import com.shaan.androiduicomponents.models.Notification
+import com.shaan.androiduicomponents.models.University
+import java.text.SimpleDateFormat
+import java.util.*
 
-object NotificationHelper {
-    private const val CHANNEL_ID = "university_notifications"
-    private const val CHANNEL_NAME = "University Updates"
-    private var notificationId = 0
+class NotificationHelper(private val context: Context) {
+    companion object {
+        private const val CHANNEL_ID = "university_notifications"
+        private const val CHANNEL_NAME = "University Updates"
+        private const val TAG = "NotificationHelper"
 
-    fun createNotificationChannel(context: Context) {
+        const val NOTIFICATION_TYPE_SHORTLIST = "SHORTLIST"
+        const val NOTIFICATION_TYPE_DEADLINE = "DEADLINE"
+    }
+
+    init {
+        createNotificationChannel()
+    }
+
+    private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
                 CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
-                description = "Notifications for university updates and shortlist changes"
+                description = "Notifications for university updates and deadlines"
             }
             
-            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager = context.getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
         }
     }
 
-    fun showShortlistNotification(context: Context, university: University, isAdded: Boolean) {
-        val intent = Intent(context, UniversityDetailsActivity::class.java).apply {
-            putExtra("university", university)
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+    fun showDeadlineNotification(university: University, daysRemaining: Int) {
+        try {
+            val testDetails = university.admissionInfo.admissionTestDetails
+            val title = "Upcoming Deadline - ${university.generalInfo.name}"
+            val message = when {
+                daysRemaining > 1 -> "$daysRemaining days remaining for admission test on ${testDetails.date}"
+                daysRemaining == 1 -> "Tomorrow is the admission test!"
+                daysRemaining == 0 -> "Today is the admission test!"
+                else -> return
+            }
+
+            val intent = Intent(context, UniversityDetailsActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                putExtra("university", university)
+            }
+
+            val pendingIntent = PendingIntent.getActivity(
+                context,
+                university.hashCode(),
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+
+            val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_notifications)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .build()
+
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.notify(university.hashCode(), notification)
+
+            val notificationItem = Notification(
+                id = System.currentTimeMillis(),
+                title = title,
+                message = message,
+                timestamp = System.currentTimeMillis(),
+                type = NOTIFICATION_TYPE_DEADLINE,
+                universityName = university.generalInfo.name
+            )
+            CustomNotificationManager.addNotification(context, notificationItem)
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Error showing deadline notification", e)
         }
+    }
 
-        val pendingIntent = PendingIntent.getActivity(
-            context, 0, intent,
-            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
+    fun checkAndNotifyDeadlines(shortlistedUniversities: List<University>) {
+        try {
+            val today = Calendar.getInstance()
+            
+            shortlistedUniversities.forEach { university ->
+                try {
+                    val testDetails = university.admissionInfo.admissionTestDetails
+                    val testDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                        .parse(testDetails.date)?.let { date ->
+                            Calendar.getInstance().apply { time = date }
+                        }
 
-        val title = if (isAdded) "University Shortlisted" else "University Removed"
-        val message = if (isAdded) 
-            "${university.name} has been added to your shortlist" 
-        else 
-            "${university.name} has been removed from your shortlist"
+                    testDate?.let {
+                        val daysRemaining = ((it.timeInMillis - today.timeInMillis) / 
+                            (1000 * 60 * 60 * 24)).toInt()
 
-        val systemNotification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_notifications)
-            .setContentTitle(title)
-            .setContentText(message)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setAutoCancel(true)
-            .setContentIntent(pendingIntent)
-            .build()
+                        when (daysRemaining) {
+                            7, 3, 1, 0 -> showDeadlineNotification(university, daysRemaining)
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error checking deadline for ${university.generalInfo.name}", e)
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error checking deadlines", e)
+        }
+    }
 
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.notify(notificationId++, systemNotification)
+    fun showShortlistNotification(university: University, isShortlisted: Boolean) {
+        try {
+            val title = if (isShortlisted) 
+                "University Shortlisted" 
+            else 
+                "University Removed from Shortlist"
+            
+            val message = if (isShortlisted)
+                "${university.generalInfo.name} has been added to your shortlist"
+            else
+                "${university.generalInfo.name} has been removed from your shortlist"
 
-        // Save notification to storage
-        val appNotification = Notification(
-            title = title,
-            message = message,
-            university = university
-        )
-        CustomNotificationManager.addNotification(context, appNotification)
+            val intent = Intent(context, UniversityDetailsActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                putExtra("university", university)
+            }
+
+            val pendingIntent = PendingIntent.getActivity(
+                context,
+                university.hashCode(),
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+
+            val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_notifications)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .build()
+
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.notify(university.hashCode(), notification)
+
+            val notificationItem = Notification(
+                id = System.currentTimeMillis(),
+                title = title,
+                message = message,
+                timestamp = System.currentTimeMillis(),
+                type = NOTIFICATION_TYPE_SHORTLIST,
+                universityName = university.generalInfo.name
+            )
+            CustomNotificationManager.addNotification(context, notificationItem)
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Error showing shortlist notification", e)
+        }
     }
 } 

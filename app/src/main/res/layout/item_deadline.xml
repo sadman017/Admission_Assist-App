@@ -8,6 +8,7 @@
     android:background="?attr/selectableItemBackground">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/dateCard"
         android:layout_width="48dp"
         android:layout_height="48dp"
         app:cardCornerRadius="24dp"
@@ -20,7 +21,7 @@
             android:gravity="center"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:text="15\nJAN"/>
+            android:text="15\nJAN" />
     </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
@@ -36,21 +37,32 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:text="University Name"/>
+            android:text="University Name" />
 
         <TextView
             android:id="@+id/deadlineTypeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:text="Application Deadline"/>
+            android:text="Application Deadline" />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/reminderButton"
+    <!-- Date and Time Aligned to the Right -->
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_notifications"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:gravity="center">
+
+
+        <TextView
+            android:id="@+id/applicationDeadlineTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:layout_marginTop="4dp"
+            android:textSize="14sp"
+            android:text="10:00 AM" />
+    </LinearLayout>
 </LinearLayout>

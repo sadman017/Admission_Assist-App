@@ -36,10 +36,10 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/removeButton"
+            android:id="@+id/shortlistButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_close"
+            android:src="@drawable/ic_bookmark_filled"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="8dp"/>
     </LinearLayout>

@@ -6,32 +6,35 @@ object ShortlistManager {
     private const val PREF_NAME = "shortlist_preferences"
     private const val KEY_SHORTLISTED = "shortlisted_universities"
 
-    fun getShortlistedUniversities(context: Context): Set<String> {
-        val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        return prefs.getStringSet(KEY_SHORTLISTED, emptySet()) ?: emptySet()
-    }
-
     fun addToShortlist(context: Context, universityName: String) {
-        val currentList = getShortlistedUniversities(context).toMutableSet()
-        currentList.add(universityName)
-        saveShortlist(context, currentList)
+        val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val currentShortlist = getShortlistedUniversities(context).toMutableSet()
+        currentShortlist.add(universityName)
+        
+        sharedPreferences.edit().putStringSet(KEY_SHORTLISTED, currentShortlist).apply()
     }
 
     fun removeFromShortlist(context: Context, universityName: String) {
-        val currentList = getShortlistedUniversities(context).toMutableSet()
-        currentList.remove(universityName)
-        saveShortlist(context, currentList)
+        val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        val currentShortlist = getShortlistedUniversities(context).toMutableSet()
+        currentShortlist.remove(universityName)
+        
+        sharedPreferences.edit().putStringSet(KEY_SHORTLISTED, currentShortlist).apply()
     }
 
-    private fun saveShortlist(context: Context, universities: Set<String>) {
-        val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        prefs.edit().putStringSet(KEY_SHORTLISTED, universities).apply()
+    fun getShortlistedUniversities(context: Context): Set<String> {
+        val sharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        return sharedPreferences.getStringSet(KEY_SHORTLISTED, emptySet()) ?: emptySet()
     }
 
-    fun getShortlistedUniversityObjects(context: Context): List<University> {
+    fun isUniversityShortlisted(context: Context, universityName: String): Boolean {
+        return getShortlistedUniversities(context).contains(universityName)
+    }
+
+    fun getShortlistedUniversityList(context: Context, allUniversities: List<University>): List<University> {
         val shortlistedNames = getShortlistedUniversities(context)
-        return UniversityListActivity.universities.filter {
-            shortlistedNames.contains(it.name) 
+        return allUniversities.filter { university -> 
+            shortlistedNames.contains(university.generalInfo.name) 
         }
     }
 }

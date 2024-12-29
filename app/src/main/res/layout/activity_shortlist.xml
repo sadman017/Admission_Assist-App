@@ -13,9 +13,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/md_theme_errorContainer_mediumContrast"
             app:titleTextColor="@color/white"/>
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
@@ -61,9 +60,6 @@
                 android:layout_marginTop="8dp"
                 android:text="Start exploring universities and bookmark your favorites"
                 android:textAlignment="center"/>
-
         </LinearLayout>
-
     </FrameLayout>
-
-</LinearLayout> 
+</LinearLayout>

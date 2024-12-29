@@ -1,131 +1,162 @@
 package com.shaan.androiduicomponents
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.firestore.FirebaseFirestore
+import com.shaan.androiduicomponents.databinding.ActivityDeadlinesBinding
 import com.shaan.androiduicomponents.models.Deadline
-import java.time.LocalDate
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class DeadlinesActivity : AppCompatActivity() {
-    private lateinit var adapter: DeadlinesAdapter
-    private lateinit var searchEditText: TextInputEditText
-    private var deadlines = mutableListOf<Deadline>()
+    private lateinit var binding: ActivityDeadlinesBinding
+    private lateinit var adapter: DeadlineAdapter
+    private var fetchJob: Job? = null
+
+    companion object {
+        private const val TAG = "DeadlinesActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_deadlines)
+        Log.d(TAG, "onCreate: Starting DeadlinesActivity")
+        
+        try {
+            binding = ActivityDeadlinesBinding.inflate(layoutInflater)
+            setContentView(binding.root)
 
-        setupToolbar()
-        setupRecyclerView()
-        setupSearch()
-        setupSortingOptions()
-        loadDeadlines()
+            setupToolbar()
+            setupRecyclerView()
+            loadDeadlines()
+        } catch (e: Exception) {
+            Log.e(TAG, "onCreate: Error initializing activity", e)
+            Toast.makeText(this, "Error initializing deadlines", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setupToolbar() {
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Deadlines"
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        Log.d(TAG, "setupToolbar: Setting up toolbar")
+        try {
+            setSupportActionBar(binding.toolbar)
+            supportActionBar?.apply {
+                setDisplayHomeAsUpEnabled(true)
+                title = "Admission Deadlines"
+            }
+            binding.toolbar.setNavigationOnClickListener {
+                onBackPressedDispatcher.onBackPressed()
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "setupToolbar: Failed to setup toolbar", e)
+            throw e
+        }
     }
 
     private fun setupRecyclerView() {
-        val recyclerView = findViewById<RecyclerView>(R.id.deadlinesRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = DeadlinesAdapter(emptyList()) { deadline ->
-            // Handle deadline click - maybe show details or edit
-            showDeadlineDetails(deadline)
-        }
-        recyclerView.adapter = adapter
-    }
-
-    private fun setupSearch() {
-        searchEditText = findViewById(R.id.searchEditText)
-        searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                filterDeadlines(s?.toString() ?: "")
+        Log.d(TAG, "setupRecyclerView: Setting up RecyclerView")
+        try {
+            adapter = DeadlineAdapter()
+            binding.deadlinesRecyclerView.apply {
+                layoutManager = LinearLayoutManager(this@DeadlinesActivity)
+                adapter = this@DeadlinesActivity.adapter
+                addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-    }
-
-    private fun setupSortingOptions() {
-        val sortButton = findViewById<MaterialButton>(R.id.sortButton)
-        sortButton.setOnClickListener {
-            showSortingDialog()
+        } catch (e: Exception) {
+            Log.e(TAG, "setupRecyclerView: Failed to setup RecyclerView", e)
+            throw e
         }
-    }
-
-    private fun showSortingDialog() {
-        val options = arrayOf("Date (Earliest)", "Date (Latest)", "University Name (A-Z)")
-        MaterialAlertDialogBuilder(this)
-            .setTitle("Sort By")
-            .setItems(options) { _, which ->
-                when (which) {
-                    0 -> sortByDate(ascending = true)
-                    1 -> sortByDate(ascending = false)
-                    2 -> sortByUniversityName()
-                }
-            }
-            .show()
-    }
-
-    private fun sortByDate(ascending: Boolean) {
-        deadlines.sortBy { LocalDate.parse(it.date) }
-        if (!ascending) deadlines.reverse()
-        adapter.updateList(deadlines)
-    }
-
-    private fun sortByUniversityName() {
-        deadlines.sortBy { it.universityName }
-        adapter.updateList(deadlines)
-    }
-
-    private fun filterDeadlines(query: String) {
-        val filteredList = if (query.isEmpty()) {
-            deadlines
-        } else {
-            deadlines.filter {
-                it.universityName.contains(query, ignoreCase = true) ||
-                it.type.contains(query, ignoreCase = true)
-            }
-        }
-        adapter.updateList(filteredList)
     }
 
     private fun loadDeadlines() {
-        // TODO: Load from database/storage
-        deadlines = mutableListOf(
-            Deadline("University of Dhaka", "Application Deadline", "2024-01-15"),
-            Deadline("BUET", "Admission Test", "2024-02-01"),
-            Deadline("Chittagong University", "Form Fill-up", "2024-01-20"),
-            Deadline("Rajshahi University", "Application Deadline", "2024-01-25"),
-            Deadline("Khulna University", "Admission Test", "2024-02-15")
-        )
-        adapter.updateList(deadlines)
+        Log.d(TAG, "loadDeadlines: Starting to fetch deadlines from Firebase")
+        showLoading()
+        
+        fetchJob?.cancel()
+        fetchJob = CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val db = FirebaseFirestore.getInstance()
+                val universities = db.collection("universitylist")
+                    .get()
+                    .await()
+                    .documents
+                    .mapNotNull { doc ->
+                        try {
+                            val admissionInfo = doc.get("admissionInfo") as? Map<*, *>
+                            val generalInfo = doc.get("generalInfo") as? Map<*, *>
+                            val testDetails = (admissionInfo?.get("admissionTestDetails") as? Map<*, *>)
+
+                            if (testDetails != null && generalInfo != null) {
+                                Deadline(
+                                    universityName = generalInfo["name"]?.toString() ?: "",
+                                    eventType = "Admission Test",
+                                    date = testDetails["date"]?.toString() ?: "",
+                                    time = testDetails["time"]?.toString() ?: ""
+                                )
+                            } else null
+                        } catch (e: Exception) {
+                            Log.e(TAG, "Error parsing document", e)
+                            null
+                        }
+                    }
+
+                if (universities.isEmpty()) {
+                    showEmptyState()
+                } else {
+                    hideEmptyState()
+                    val sortedDeadlines = universities.sortedWith(
+                        compareBy<Deadline> {
+                            when {
+                                it.isOngoing() -> 0
+                                it.isUpcoming() -> 1
+                                else -> 2
+                            }
+                        }.thenBy { it.date }
+                    )
+                    adapter.updateDeadlines(sortedDeadlines)
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error loading deadlines", e)
+                Toast.makeText(
+                    this@DeadlinesActivity,
+                    "Error loading deadlines: ${e.localizedMessage}",
+                    Toast.LENGTH_LONG
+                ).show()
+                showEmptyState()
+            } finally {
+                hideLoading()
+            }
+        }
     }
 
-    private fun showDeadlineDetails(deadline: Deadline) {
-        MaterialAlertDialogBuilder(this)
-            .setTitle(deadline.universityName)
-            .setMessage("""
-                Type: ${deadline.type}
-                Date: ${deadline.date}
-            """.trimIndent())
-            .setPositiveButton("Set Reminder") { _, _ ->
-                // TODO: Implement reminder functionality
-                Toast.makeText(this, "Reminder functionality coming soon", Toast.LENGTH_SHORT).show()
-            }
-            .setNegativeButton("Close", null)
-            .show()
+    private fun showLoading() {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.deadlinesRecyclerView.visibility = View.GONE
+        binding.emptyStateView.visibility = View.GONE
+    }
+
+    private fun hideLoading() {
+        binding.progressBar.visibility = View.GONE
+        binding.deadlinesRecyclerView.visibility = View.VISIBLE
+    }
+
+    private fun showEmptyState() {
+        binding.emptyStateView.visibility = View.VISIBLE
+        binding.deadlinesRecyclerView.visibility = View.GONE
+    }
+
+    private fun hideEmptyState() {
+        binding.emptyStateView.visibility = View.GONE
+        binding.deadlinesRecyclerView.visibility = View.VISIBLE
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fetchJob?.cancel()
     }
 }

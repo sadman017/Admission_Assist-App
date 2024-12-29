@@ -151,7 +151,9 @@
             android:layout_height="wrap_content"
             android:text="Check Eligibility"
             android:layout_marginTop="24dp"
+            android:backgroundTint="@color/md_theme_errorContainer_mediumContrast"
             android:layout_marginBottom="16dp"/>
 
     </LinearLayout>
+
 </ScrollView> 

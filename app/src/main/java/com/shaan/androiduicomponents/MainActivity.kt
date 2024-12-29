@@ -19,6 +19,9 @@ class MainActivity : AppCompatActivity() {
 //                }
 //            }
 //        }
+
+        // Schedule deadline checks
+        DeadlineCheckWorker.schedule(this)
     }
 
 

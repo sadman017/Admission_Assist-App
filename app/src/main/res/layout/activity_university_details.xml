@@ -14,9 +14,9 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/md_theme_errorContainer_mediumContrast"
             app:title="University Info"
-            app:titleTextColor="@color/colorCustomColor1" />
+            app:titleTextColor="@color/colorOnCustomColor1" />
 
         <!-- TabLayout for different sections -->
         <com.google.android.material.tabs.TabLayout

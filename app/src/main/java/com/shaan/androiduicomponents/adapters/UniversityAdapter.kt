@@ -21,7 +21,7 @@ class UniversityAdapter(
         val locationText: TextView = view.findViewById(R.id.locationText)
         val typeText: TextView = view.findViewById(R.id.universityTypeText)
         val shortlistButton: ImageButton = view.findViewById(R.id.shortlistButton)
-        
+
         init {
             nameText.setTextColor(view.context.getColor(R.color.colorCustomColor1))
             nameText.isClickable = true
@@ -32,27 +32,25 @@ class UniversityAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val university = universities[position]
-        holder.nameText.text = university.name
-        holder.locationText.text = university.location
-        holder.typeText.text = university.universityType
+        holder.nameText.text = university.generalInfo.name
+        holder.locationText.text = university.generalInfo.location
+        holder.typeText.text = university.generalInfo.universityType
 
-        // Set click listener on the name text
         holder.nameText.setOnClickListener {
             onItemClick(university)
         }
 
-        // Handle shortlist button visibility and state
         holder.shortlistButton.visibility = if (showShortlistButton) View.VISIBLE else View.GONE
         if (showShortlistButton) {
-            val isShortlisted = shortlistedUniversities.contains(university.name)
+            val isShortlisted = shortlistedUniversities.contains(university.generalInfo.name)
             updateShortlistButton(holder.shortlistButton, isShortlisted)
 
             holder.shortlistButton.setOnClickListener {
                 val newState = !isShortlisted
                 if (newState) {
-                    shortlistedUniversities.add(university.name)
+                    shortlistedUniversities.add(university.generalInfo.name)
                 } else {
-                    shortlistedUniversities.remove(university.name)
+                    shortlistedUniversities.remove(university.generalInfo.name)
                 }
                 updateShortlistButton(holder.shortlistButton, newState)
                 onShortlistClick(university, newState)

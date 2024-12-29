@@ -6,30 +6,12 @@
     android:layout_height="match_parent"
     android:background="@color/material_grey_50">
 
-    <!-- AppBar with Toolbar -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_menu"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:title="University Navigator"
-            app:titleTextColor="@color/white"/>
-    </com.google.android.material.appbar.AppBarLayout>
-
     <!-- Scrollable Content -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/appBar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,21 +35,34 @@
                 android:layout_marginBottom="16dp"
                 android:clickable="true"
                 android:focusable="true">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/titleExploreUniversities"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Explore Features:"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorCustomColor1Container_highContrast"
+                    android:layout_marginBottom="12dp"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp">
+
 
                     <ImageView
                         android:id="@+id/iconUniversityFinder"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/baseline_search_24"
-                        app:tint="?attr/colorPrimary"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:tint="@color/colorCustomColor1"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
                     <TextView
                         android:id="@+id/textUniversityFinder"
@@ -76,10 +71,10 @@
                         android:text="University Finder"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="?attr/colorPrimary"
+                        android:textColor="@color/colorCustomColor1"
                         app:layout_constraintTop_toTopOf="@id/iconUniversityFinder"
                         app:layout_constraintStart_toEndOf="@id/iconUniversityFinder"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <TextView
                         android:id="@+id/subtextUniversityFinder"
@@ -90,7 +85,7 @@
                         android:textColor="@color/grey"
                         app:layout_constraintTop_toBottomOf="@id/textUniversityFinder"
                         app:layout_constraintStart_toStartOf="@id/textUniversityFinder"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintEnd_toEndOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -119,10 +114,10 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/baseline_check_circle_24"
-                        app:tint="@color/teal_700"
+                        app:tint="@color/colorCustomColor1"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
                     <TextView
                         android:id="@+id/textEligibilityCheck"
@@ -131,10 +126,10 @@
                         android:text="Eligibility Check"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="@color/teal_700"
+                        android:textColor="@color/colorCustomColor1"
                         app:layout_constraintTop_toTopOf="@id/iconEligibilityCheck"
                         app:layout_constraintStart_toEndOf="@id/iconEligibilityCheck"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <TextView
                         android:id="@+id/subtextEligibilityCheck"
@@ -145,11 +140,11 @@
                         android:textColor="@color/black"
                         app:layout_constraintTop_toBottomOf="@id/textEligibilityCheck"
                         app:layout_constraintStart_toStartOf="@id/textEligibilityCheck"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintEnd_toEndOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Additional sections like Deadlines and Shortlists can follow the same pattern -->
+            <!-- Deadlines Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/deadlinesCard"
                 android:layout_width="0dp"
@@ -160,7 +155,9 @@
                 app:cardCornerRadius="16dp"
                 app:cardElevation="6dp"
                 app:cardBackgroundColor="@color/white"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -175,7 +172,7 @@
                         app:tint="@color/colorCustomColor1"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
                     <TextView
                         android:id="@+id/textDeadlines"
@@ -187,7 +184,7 @@
                         android:textColor="@color/colorCustomColor1"
                         app:layout_constraintTop_toTopOf="@id/iconDeadlines"
                         app:layout_constraintStart_toEndOf="@id/iconDeadlines"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <TextView
                         android:id="@+id/subtextDeadlines"
@@ -198,10 +195,11 @@
                         android:textColor="@color/black"
                         app:layout_constraintTop_toBottomOf="@id/textDeadlines"
                         app:layout_constraintStart_toStartOf="@id/textDeadlines"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintEnd_toEndOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Shortlist Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/shortlistCard"
                 android:layout_width="0dp"
@@ -212,7 +210,9 @@
                 app:cardCornerRadius="16dp"
                 app:cardElevation="6dp"
                 app:cardBackgroundColor="@color/white"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -224,10 +224,10 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/baseline_lock_24"
-                        app:tint="@color/purple_500"
+                        app:tint="@color/colorCustomColor1"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
                     <TextView
                         android:id="@+id/textShortlist"
@@ -236,10 +236,10 @@
                         android:text="My Shortlist"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="@color/purple_700"
+                        android:textColor="@color/colorCustomColor1"
                         app:layout_constraintTop_toTopOf="@id/iconShortlist"
                         app:layout_constraintStart_toEndOf="@id/iconShortlist"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                     <TextView
                         android:id="@+id/subtextShortlist"
@@ -250,10 +250,246 @@
                         android:textColor="@color/black"
                         app:layout_constraintTop_toBottomOf="@id/textShortlist"
                         app:layout_constraintStart_toStartOf="@id/textShortlist"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintEnd_toEndOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- After the existing Shortlist Card, add these new sections: -->
+
+            <!-- Admission Test Preparation Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/admissionTestCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/shortlistCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true">
+                <TextView
+                    android:id="@+id/titleExploreUniversities1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upcoming Features:"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorCustomColor1Container_highContrast"
+                    android:layout_marginBottom="12dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/iconAdmissionTest"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/baseline_school_24"
+                        app:tint="@color/colorCustomColor1"
+                        android:paddingRight="5dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textAdmissionTest"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Admission Test Prep"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorCustomColor1"
+                        app:layout_constraintTop_toTopOf="@id/iconAdmissionTest"
+                        app:layout_constraintStart_toEndOf="@id/iconAdmissionTest"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/subtextAdmissionTest"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Practice tests, syllabus &amp; previous questions"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toBottomOf="@id/textAdmissionTest"
+                        app:layout_constraintStart_toStartOf="@id/textAdmissionTest"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Unit System Guide Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/unitSystemCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/admissionTestCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/iconUnitSystem"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/baseline_unit_system_24"
+                        app:tint="@color/colorCustomColor1"
+                        android:paddingRight="5dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textUnitSystem"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Unit System Guide"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorCustomColor1"
+                        app:layout_constraintTop_toTopOf="@id/iconUnitSystem"
+                        app:layout_constraintStart_toEndOf="@id/iconUnitSystem"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/subtextUnitSystem"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Understanding A, B, C, D unit systems"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toBottomOf="@id/textUnitSystem"
+                        app:layout_constraintStart_toStartOf="@id/textUnitSystem"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Merit Position Calculator Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/meritCalculatorCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/unitSystemCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/iconMeritCalculator"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/baseline_calculate_24"
+                        app:tint="@color/colorCustomColor1"
+                        android:paddingRight="5dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textMeritCalculator"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Merit Calculator"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorCustomColor1"
+                        app:layout_constraintTop_toTopOf="@id/iconMeritCalculator"
+                        app:layout_constraintStart_toEndOf="@id/iconMeritCalculator"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/subtextMeritCalculator"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Calculate expected merit position"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toBottomOf="@id/textMeritCalculator"
+                        app:layout_constraintStart_toStartOf="@id/textMeritCalculator"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Subject Choice Guide Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/subjectChoiceCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/meritCalculatorCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/iconSubjectChoice"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/baseline_list_24"
+                        app:tint="@color/colorCustomColor1"
+                        android:paddingRight="5dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textSubjectChoice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Subject Choice Guide"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorCustomColor1"
+                        app:layout_constraintTop_toTopOf="@id/iconSubjectChoice"
+                        app:layout_constraintStart_toEndOf="@id/iconSubjectChoice"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/subtextSubjectChoice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Department selection &amp; career guidance"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        app:layout_constraintTop_toBottomOf="@id/textSubjectChoice"
+                        app:layout_constraintStart_toStartOf="@id/textSubjectChoice"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
