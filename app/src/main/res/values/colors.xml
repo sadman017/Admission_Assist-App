@@ -3,13 +3,14 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="teal_200">#F44336</color>
+    <color name="teal_700">#F44336</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="buttoncolor">#2196F3</color>
+    <color name="buttoncolor">#F44336</color>
     <color name="grey">#8C8C8C</color>
 
+    <color name="colorError">#F44336</color>
 
     <color name="md_theme_primary">#6D5E0F</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
@@ -164,4 +165,15 @@
     <color name="colorOnCustomColor1_highContrast">#FFFFFF</color>
     <color name="colorCustomColor1Container_highContrast">#004A52</color>
     <color name="colorOnCustomColor1Container_highContrast">#FFFFFF</color>
+    <!-- Timeline Status Colors -->
+    <color name="status_completed">#B1313E</color>
+    <color name="status_pending">#FFA000</color>
+    <color name="status_upcoming">#4CAF50</color>
+    <color name="upcoming_color">#4CAF50</color>
+    <color name="ongoing_color">#FF9800</color>
+    <color name="closed_color">#F44336</color>
+
+
+
+    <color name="colorPrimary">#F44336</color>
 </resources>

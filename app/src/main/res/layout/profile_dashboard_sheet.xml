@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Profile Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/ic_profile_placeholder"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:id="@+id/userNameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/userEmailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View style="@style/Divider"/>
+
+        <!-- Profile Options -->
+        <TextView
+            android:id="@+id/editProfileOption"
+            style="@style/ProfileOption"
+            android:text="Edit Profile"
+            android:drawableStart="@drawable/ic_edit"/>
+
+        <TextView
+            android:id="@+id/viewProfileOption"
+            style="@style/ProfileOption"
+            android:text="View Profile"
+            android:drawableStart="@drawable/ic_person"/>
+
+        <TextView
+            android:id="@+id/settingsOption"
+            style="@style/ProfileOption"
+            android:text="Settings"
+            android:drawableStart="@drawable/ic_settings"/>
+
+        <TextView
+            android:id="@+id/helpOption"
+            style="@style/ProfileOption"
+            android:text="Help &amp; Support"
+            android:drawableStart="@drawable/ic_help"/>
+
+        <View style="@style/Divider"/>
+
+        <TextView
+            android:id="@+id/logoutOption"
+            style="@style/ProfileOption"
+            android:text="Logout"
+            android:textColor="?colorError"
+            android:drawableStart="@drawable/ic_logout"/>
+
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,10 @@
+<!-- res/drawable/facebook_icon.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#004FF4"
+        android:pathData="M22.675,0H1.325C0.593,0,0,0.593,0,1.325v21.351C0,23.407,0.593,24,1.325,24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1,1.893-4.788,4.659-4.788c1.325,0,2.463,0.099,2.795,0.143v3.24l-1.918,0.001c-1.504,0-1.794,0.715-1.794,1.763v2.312h3.587l-0.467,3.622h-3.12V24h6.116C23.407,24,24,23.407,24,22.675V1.325C24,0.593,23.407,0,22.675,0z"/>
+</vector>

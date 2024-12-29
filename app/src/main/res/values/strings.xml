@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">AndroidUIComponents</string>
+    <string name="app_name">Admission Navigator</string>
+    <string name="next">Next</string>
+    <string name="submit">Submit</string>
 </resources>
